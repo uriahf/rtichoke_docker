@@ -25,35 +25,41 @@ function(req, res) {
     probs = req$body$probs,
     reals = req$body$reals
   )
+  
   as.character(xml2::read_html("summary_report.html"))
   
 }
 
-#* @post /create_roc_curve_list
+#* @post /prepare_performance_data
 #* @serializer json
 function(req, res){
-
   
-  # print(typeof(req$body$probs))
-  # print(str(req$body$probs))
-  # print(is.list(req$body$probs))
   print("probs")
   
   print(req$body$probs)
   
   print("reals")
   print(req$body$reals)
-  # print(typeof(req$body$reals))
-  # print(str(req$body$reals))
-  # print(is.list(req$body$reals))
-  # 
-  print(
-    prepare_performance_data(
-      probs = req$body$probs,
-      reals = req$body$reals,
-      stratified_by = req$body$stratified_by
-    )
-  )
+  
+  prepare_performance_data(
+    probs = req$body$probs,
+    reals = req$body$reals,
+    stratified_by = req$body$stratified_by
+  ) 
+  
+}
+
+
+#* @post /create_roc_curve_list
+#* @serializer json
+function(req, res){
+
+  print("probs")
+  
+  print(req$body$probs)
+  
+  print("reals")
+  print(req$body$reals)
   
   prepare_performance_data(
     probs = req$body$probs,
@@ -61,6 +67,16 @@ function(req, res){
     stratified_by = req$body$stratified_by
    ) |> 
     rtichoke:::create_rtichoke_curve_list("roc")
+  
+}
+
+#* @post /plot_roc_curve_list
+#* @serializer json
+function(req, res){
+
+    rtichoke:::create_rtichoke_curve_list(
+      req$body$performance_data,
+      "roc")
   
 }
 
@@ -170,7 +186,23 @@ function(req, res){
   
 }
 
-
+#* @post /create_calibration_curve_list
+#* @serializer json
+function(req, res){
+  
+  print("probs")
+  
+  print(req$body$probs)
+  
+  print("reals")
+  print(req$body$reals)
+  
+  create_calibration_curve_list(
+    probs = req$body$probs,
+    reals = req$body$reals
+  )
+  
+}
 
 #* @post /prepare_performance_data
 #* @serializer json
