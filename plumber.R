@@ -64,9 +64,13 @@ function(req, res){
   prepare_performance_data(
     probs = req$body$probs,
     reals = req$body$reals,
+    by = req$body$by,
     stratified_by = req$body$stratified_by
    ) |> 
-    rtichoke:::create_rtichoke_curve_list("roc")
+    rtichoke:::create_rtichoke_curve_list(
+      "roc",
+      size = req$body$size,
+      col_values = req$body$col_values)
   
 }
 
