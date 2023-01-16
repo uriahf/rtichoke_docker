@@ -61,6 +61,21 @@ function(req, res){
   print("reals")
   print(req$body$reals)
   
+  print("by")
+  
+  print(req$body$by)
+  
+  print("stratified_by")
+  print(req$body$stratified_by)
+  
+  print("size")
+  print(req$body$size)
+  
+  print("color_values")
+  print(req$body$color_values)  
+  
+    
+  
   prepare_performance_data(
     probs = req$body$probs,
     reals = req$body$reals,
@@ -70,8 +85,7 @@ function(req, res){
     rtichoke:::create_rtichoke_curve_list(
       "roc",
       size = req$body$size,
-      col_values = req$body$col_values)
-  
+      color_values = req$body$color_values)
 }
 
 #* @post /plot_roc_curve_list
