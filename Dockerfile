@@ -2,7 +2,7 @@ FROM rocker/r-ver
 
 # Install additional R packages
 RUN R -e 'install.packages(c("plumber", "devtools"))'
-RUN R -e 'devtools::install_github("uriahf/rtichoke", ref = "support_python_users")'
+RUN R -e 'devtools::install_github("uriahf/rtichoke")'
 
 # Copy your R code into the container
 WORKDIR /app
